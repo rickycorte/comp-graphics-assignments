@@ -7,3 +7,8 @@ build/
 **/cmake_install.cmake
 **/Makefile
 **/CMakeFiles/
+.vs
+out/
+*.exe
+*.ilk
+*.pdb
