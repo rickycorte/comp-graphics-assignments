@@ -6,3 +6,5 @@ project(Computer_Graphics)
 add_subdirectory(A00)
 
 add_subdirectory(A01)
+
+add_subdirectory(A02)
