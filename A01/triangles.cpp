@@ -15,43 +15,46 @@
  an example to help students not familiar with C++.
 ***************/
 
-// this file is just copy pasted inside a loop so macros are the only way to make magic things without becoming crazy by repetition
-// Alternatively you can edit the main cpp file to create similar function that runs the macros code :3
-//This approach is totally bad for many different reasons but the assignment asks to edit only this file so...
+// lambda are used to create simple shapes
 
-float lh, rh, top, bot;
-
-#define QUAD(center_x, center_y, size_x, size_y, r, g, b) 	\
-	lh = center_x - size_x /2;				 				\
-	rh = center_x + size_x /2;				 				\
-	top = center_y + size_y /2;			 					\
-	bot = center_y - size_y /2;			 					\
-	Triangle(lh, top, rh, top, lh, bot, r, g, b);	 		\
+auto quad = [=](float center_x, float center_y, float size_x, float size_y, float r, float g, float b) {
+	float lh = center_x - size_x /2;				 				
+	float rh = center_x + size_x /2;				 				
+	float top = center_y + size_y /2;			 					
+	float bot = center_y - size_y /2;			 					
+	Triangle(lh, top, rh, top, lh, bot, r, g, b);	 		
 	Triangle(rh, top, rh, bot, lh, bot, r, g, b);
+};
 
-#define CIRCLE(x, y, radius, frames, r, g, b) 					\
-	for(int i =0; i< frames; i++) {								\
-		float step = 2.0 * 3.14159 / (float)frames;	  							\
-		Triangle(x, y, 						 					\
-			x + radius * cos(step * i), y - radius * sin(step * i),				\
-			x + radius * cos(step * (i+1)), y - radius * sin( step * (i+1)),		\
-			r, g, b);											\
+auto circle = [=](float x, float y, float radius, float frames, float r, float g, float b) {
+	for(int i =0; i< frames; i++) {								
+		float step = 2.0 * 3.14159 / (float)frames;	  							
+		Triangle(x, y, 						 					
+			x + radius * cos(step * i), y - radius * sin(step * i),				
+			x + radius * cos(step * (i+1)), y - radius * sin( step * (i+1)),		
+			r, g, b);											
 	}
+};
+
+
+// scene generation
 
 // house
-QUAD(0.35, 0.5,0.5, 0.6, 0.0, 0.0, 1.0)
+quad(0.35, 0.5,0.5, 0.6, 0.0, 0.0, 1.0);
+//QUAD(0.35, 0.5,0.5, 0.6, 0.0, 0.0, 1.0)
 Triangle(0, 0.2, 0.35, -0.4, 0.7, 0.2, 1,0,0);
-QUAD(0.45, 0.35, 0.1, 0.1, 1, 1, 0)
-QUAD(0.25, 0.35, 0.1, 0.1, 1, 1, 0)
-QUAD(0.35, 0.7, 0.1, 0.2, 1, 1, 0)
+quad(0.45, 0.35, 0.1, 0.1, 1, 1, 0);
+quad(0.25, 0.35, 0.1, 0.1, 1, 1, 0);
+quad(0.35, 0.7, 0.1, 0.2, 1, 1, 0);
 
-// draw a sample flower
-QUAD(-0.5, 0.75, 0.01, 0.2, 0, 1, 0)
-CIRCLE(-0.5, 0.7, 0.05, 50, 0.698, 0.160, 0.701)
-CIRCLE(-0.5, 0.7, 0.02, 50, 1, 1, 0)
+// draw a sample flower 
+quad(-0.5, 0.75, 0.01, 0.2, 0, 1, 0);
+circle(-0.5, 0.7, 0.05, 50, 0.698, 0.160, 0.701);
+circle(-0.5, 0.7, 0.02, 50, 1, 1, 0);
+
 
 // ground
-QUAD(0, 0.9, 2, 0.2, 0, 1, 0)
+quad(0, 0.9, 2, 0.2, 0, 1, 0);
 
 
 for(int i = 0; i < 32; i++) {

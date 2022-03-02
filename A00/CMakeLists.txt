@@ -32,7 +32,6 @@ if (UNIX)
 
 
 	# include glfw
-	# todo: fix in a way to omit glfw from target link libraries
 	find_package(glfw3 REQUIRED)
 	if (glfw3_FOUND)
 	  message(STATUS "GLFW found")
