@@ -16,3 +16,5 @@ add_subdirectory(A04)
 add_subdirectory(A05)
 
 add_subdirectory(A06)
+
+add_subdirectory(A07)
