@@ -12,9 +12,6 @@ glm::vec3 getInput(GLFWwindow* window)
 	if (glfwGetKey(window, GLFW_KEY_D)) mov.x = 1;
 	if (glfwGetKey(window, GLFW_KEY_A)) mov.x = -1;
 
-	if (glfwGetKey(window, GLFW_KEY_UP)) mov.y = 1;
-	if (glfwGetKey(window, GLFW_KEY_DOWN)) mov.y = -1;
-
 	return mov;
 }
 
