@@ -143,10 +143,10 @@ void make_spring() {
 
 
 	int rounds = 2;
-	int steps = 10; // steps for every round (360 rotation)
+	int steps = 15; // steps for every round (360 rotation)
 	float round_height = 0.5f;
 
-	int tube_faces = 10;
+	int tube_faces = 15;
 
 	float angle = 0;
 	float height = 0;
@@ -201,66 +201,5 @@ void makeModels() {
 	make_sphere();
 
 	make_spring();
-
-//// M4 : Spring
-// Replace the code below, that creates a simple octahedron, with the one to create a spring.
-
-
-
-/*
-M4_vertices.resize(3 * 6);
-
-// Vertices definitions
-M4_vertices[0]  =  0.0;
-M4_vertices[1]  =  1.414;
-M4_vertices[2]  = -1.0;
-M4_vertices[3]  =  0.0;
-M4_vertices[4]  = -1.414;
-M4_vertices[5]  = -1.0;
-M4_vertices[6]  = -1.0;
-M4_vertices[7]  =  0.0;
-M4_vertices[8]  = -2.0;
-M4_vertices[9]  = -1.0;
-M4_vertices[10] =  0.0;
-M4_vertices[11] =  0.0;
-M4_vertices[12] =  1.0;
-M4_vertices[13] =  0.0;
-M4_vertices[14] =  0.0;
-M4_vertices[15] =  1.0;
-M4_vertices[16] =  0.0;
-M4_vertices[17] = -2.0;
-
-
-// Resizes the indices array. Repalce the values with the correct number of
-// indices (3 * number of triangles)
-M4_indices.resize(3 * 8);
-
-// indices definitions
-M4_indices[0]  = 0;
-M4_indices[1]  = 2;
-M4_indices[2]  = 3;
-M4_indices[3]  = 1;
-M4_indices[4]  = 3;
-M4_indices[5]  = 2;
-M4_indices[6]  = 0;
-M4_indices[7]  = 3;
-M4_indices[8]  = 4;
-M4_indices[9]  = 1;
-M4_indices[10] = 4;
-M4_indices[11] = 3;
-M4_indices[12] = 0;
-M4_indices[13] = 4;
-M4_indices[14] = 5;
-M4_indices[15] = 1;
-M4_indices[16] = 5;
-M4_indices[17] = 4;
-M4_indices[18] = 0;
-M4_indices[19] = 5;
-M4_indices[20] = 2;
-M4_indices[21] = 1;
-M4_indices[22] = 2;
-M4_indices[23] = 5;
-
-*/
 
 }
