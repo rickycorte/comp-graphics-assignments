@@ -8,14 +8,7 @@ void putVertex(std::vector<tinyobj::real_t>& verts, int index, float x, float y,
 
 }
 
-// this function creates the geometries to be shown, and output thems
-// in global variables M1_vertices and M1_indices to M4_vertices and M4_indices
-void makeModels() {
-	//// M1 : Cube
-	// Replace the code below, that creates a simple square, with the one to create a cube.
-
-	// Resizes the vertices array. Repalce the values with the correct number of
-	// vertices components (3 * number of vertices)
+void make_cube() {
 	M1_vertices.resize(3 * 8);
 
 	// first vertex of M1
@@ -54,12 +47,9 @@ void makeModels() {
 		4,5,6,
 		6,7,4,
 	};
+}
 
-	//// M2 : Cylinder
-	// Replace the code below, that creates a simple rotated square, with the one to create a cylinder.
-
-	// to construct the cylinder i use vertical slices made of top triangle -> vertical rectangle -> bottom triangle
-
+void make_cylinder() {
 	float h = 2;
 	int cyl_slices = 20;
 
@@ -107,14 +97,9 @@ void makeModels() {
 
 	}
 
+}
 
-
-
-	//// M3 : Sphere
-	// Replace the code below, that creates a simple triangle, with the one to create a sphere.
-
-	// Resizes the vertices array. Repalce the values with the correct number of
-	// vertices components (3 * number of vertices)
+void make_sphere() {
 	float r = 0.5f;
 	int m = 10; // divisions of a vertical slice (add 2 to the desider quantity)
 	int n = 10; // slice around
@@ -139,7 +124,7 @@ void makeModels() {
 
 		for (int v = 0; v < m; v++)
 		{
-			
+
 			M3_indices.push_back(curr + v);
 			M3_indices.push_back(curr + v + 1);
 			M3_indices.push_back(next + v);
@@ -149,11 +134,80 @@ void makeModels() {
 			M3_indices.push_back(curr + v + 1);
 		}
 	}
+}
+
+void make_spring() {
+
+	float radius = 0.5f;
+	float tube_radius = 0.1f;
 
 
+	int rounds = 2;
+	int steps = 10; // steps for every round (360 rotation)
+	float round_height = 0.5f;
+
+	int tube_faces = 10;
+
+	float angle = 0;
+	float height = 0;
+
+	float delta_angle = 2 * PI / (float)steps;
+	float delta_step = round_height / (float)steps;
+
+	float face_step = 2 * PI / (float)tube_faces;
+
+	for (int i = 0; i < rounds * steps; i++) {
+
+		float waypoint_x = radius * glm::cos(angle);
+		float waypoint_z = radius * glm::sin(angle);
+
+		//generate tube waypoints as circles around the center of the generated line
+		for (int j = 0; j < tube_faces; j++) {
+			// we image to have a sphere centered in the waypoint and slice it with a x/z angle of `angle` radiants
+			M4_vertices.push_back(waypoint_x + tube_radius * glm::cos(angle) * glm::sin(j * face_step));
+			M4_vertices.push_back(height + tube_radius * glm::cos(j * face_step));
+			M4_vertices.push_back(waypoint_z + tube_radius * glm::sin(angle) * glm::sin(j * face_step));
+		}
+
+		angle += delta_angle;
+		height += delta_step;
+	}
+
+	for (int i = 1; i < rounds * steps; i++) {
+		for (int j = 0; j < tube_faces; j++) {
+			float next_face = (j + 1) % tube_faces;
+
+			M4_indices.push_back(i * tube_faces + j);
+			M4_indices.push_back((i - 1) * tube_faces + j);
+			M4_indices.push_back(i * tube_faces + next_face);
+
+			M4_indices.push_back((i - 1) * tube_faces + j);
+			M4_indices.push_back(i * tube_faces + next_face);
+			M4_indices.push_back((i - 1) * tube_faces + next_face);
+
+
+		}
+	}
+}
+
+// this function creates the geometries to be shown, and output thems
+// in global variables M1_vertices and M1_indices to M4_vertices and M4_indices
+void makeModels() {
+
+	make_cube();
+
+	make_cylinder();
+
+	make_sphere();
+
+	make_spring();
 
 //// M4 : Spring
 // Replace the code below, that creates a simple octahedron, with the one to create a spring.
+
+
+
+/*
 M4_vertices.resize(3 * 6);
 
 // Vertices definitions
@@ -206,4 +260,7 @@ M4_indices[20] = 2;
 M4_indices[21] = 1;
 M4_indices[22] = 2;
 M4_indices[23] = 5;
+
+*/
+
 }
