@@ -134,6 +134,8 @@ private:
             }
         }
 
+        std::cout << physicalDevice << "\n";
+
     }
 
     // INIT LOGICAL -----------------------------------------------------------------------------
@@ -172,6 +174,8 @@ private:
 
         vkGetDeviceQueue(logicDevice, aQueueWithGraphicsCapability.value(), 0, &graphicsQueue);
         vkGetDeviceQueue(logicDevice, aQueueWithPresentationCapability.value(), 0, &presentQueue);
+
+        std::cout << logicDevice << "\n";
     }
 
 
