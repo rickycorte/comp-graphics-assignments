@@ -134,7 +134,24 @@ private:
             }
         }
 
-        std::cout << physicalDevice << "\n";
+
+        // print properties of picked device
+        VkPhysicalDeviceProperties deviceProperties;
+        vkGetPhysicalDeviceProperties(physicalDevice, &deviceProperties);
+        std::cout << "\n\tAPI version: 0x" << std::hex << deviceProperties.apiVersion << "\n";
+        std::cout << "\tDriver version: 0x" << std::hex << deviceProperties.driverVersion << "\n";
+        std::cout << "\tVendor ID: 0x" << std::hex << deviceProperties.vendorID << "\n";
+        std::cout << "\tDevice ID: 0x" << std::hex << deviceProperties.deviceID << "\n";
+        std::cout << "\tPhysical Device Type: " << deviceProperties.deviceType << "\t";
+        if (deviceProperties.deviceType == VK_PHYSICAL_DEVICE_TYPE_DISCRETE_GPU)
+            std::cout << " (Discrete GPU)\n";
+        if (deviceProperties.deviceType == VK_PHYSICAL_DEVICE_TYPE_INTEGRATED_GPU)
+            std::cout << " (Integrated GPU)\n";
+        if (deviceProperties.deviceType == VK_PHYSICAL_DEVICE_TYPE_VIRTUAL_GPU)
+            std::cout << " (Virtual GPU)\n";
+        if (deviceProperties.deviceType == VK_PHYSICAL_DEVICE_TYPE_CPU)
+            std::cout << " (CPU)\n";
+        std::cout << "\tDevice Name: " << deviceProperties.deviceName << "\n";
 
     }
 
